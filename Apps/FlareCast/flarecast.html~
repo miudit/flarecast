@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Use correct character set. -->
+  <meta charset="utf-8">
+  <!-- Tell IE to use the latest, best version. -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <title>FLARECAST</title>
+  <script src="./jquery-2.2.3.min.js"></script>
+  <script type="text/javascript" src="icheck.min.js"></script>
+  <script src="../../Build/Cesium/Cesium.js"></script>
+  <script src="./script.js"></script>
+  <style>
+      @import url(../../Build/Cesium/Widgets/widgets.css);
+      html, body, #cesiumContainer {
+          width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+      }
+      .left_space {
+          display: block;
+          position: absolute;
+          top: 5px;
+          left: 5px;
+          width: 200px;
+          height: 100%;
+      }
+      .right_space {
+          display: block;
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          width: 200px;
+          height: 100%;
+      }
+      .sun {
+        position: absolute;
+        top: 100px;
+        left: 100px;
+        filter: alpha(opacity=50);
+        -moz-opacity:0.5;
+        opacity:0.5;
+      }
+      .flare {
+        position: absolute;
+        top: 100px;
+        left: 130px;
+      }
+      .gemagnetism {
+        position: absolute;
+        top: 130px;
+        left: 130px;
+      }
+      .proton {
+        position: absolute;
+        top: 160px;
+        left: 130px;
+      }
+      .aurora {
+        position: absolute;
+        top: 100px;
+        right: 100px;
+      }
+      .sun_1dayforecast {
+        position: absolute;
+        bottom: 120px;
+        left: 120px;
+      }
+      .sun_2dayforecast {
+        position: absolute;
+        bottom: 120px;
+        left: 150px;
+      }
+      .sun_3dayforecast {
+        position: absolute;
+        bottom: 120px;
+        left: 180px;
+      }
+      .aurora_1dayforecast {
+        position: absolute;
+        bottom: 120px;
+        right: 180px;
+      }
+      .aurora_2dayforecast {
+        position: absolute;
+        bottom: 120px;
+        right: 150px;
+      }
+      .aurora_3dayforecast {
+        position: absolute;
+        bottom: 120px;
+        right: 120px;
+      }
+  </style>
+  <link type="text/css" href="skins/all.css" rel="stylesheet" media="all" />
+</head>
+<body>
+  <div id="cesiumContainer"></div>
+  <div class="left_space">
+    <img src="./sun.png" width=100px height=100px class="sun">
+    <img src="./sun.png" width=100px height=100px class="flare">
+    <img src="./sun.png" width=100px height=100px class="gemagnetism">
+    <img src="./sun.png" width=100px height=100px class="proton">
+    <img src="./sun.png" width=100px height=100px class="sun_1dayforecast">
+    <img src="./sun.png" width=100px height=100px class="sun_2dayforecast">
+    <img src="./sun.png" width=100px height=100px class="sun_3dayforecast">
+  </div>
+  <div class="right_space">
+    <img src="./sun.png" width=100px height=100px class="aurora">
+    <img src="./sun.png" width=100px height=100px class="aurora_1dayforecast">
+    <img src="./sun.png" width=100px height=100px class="aurora_2dayforecast">
+    <img src="./sun.png" width=100px height=100px class="aurora_3dayforecast">
+  </div>
+</body>
+</html>
+
+<!--
+sun : http://flat-icon-design.com/?p=276
+
+-->
