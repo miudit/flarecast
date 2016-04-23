@@ -18,8 +18,8 @@
 </head>
 <body>
   <div id="cesiumContainer"></div>
-  <script>
+  <!--<script>
     var viewer = new Cesium.Viewer('cesiumContainer');
-  </script>
+  </script>-->
 </body>
 </html>
