@@ -23,7 +23,7 @@ Space Apps Tsukuba @ Jaxa
   * http://services.swpc.noaa.gov/text/goes-xray-flux-primary.txt
 - Solar radiation storms
   * Solar radiation storms GOES13 proton flux (5 min)
-  *http://services.swpc.noaa.gov/text/goes-energetic-proton-flux-primary.txt
+  * http://services.swpc.noaa.gov/text/goes-energetic-proton-flux-primary.txt
 - Geomagnetic storms
   * Estimated planetary k index (daily)
   * http://services.swpc.noaa.gov/text/daily-geomagnetic-indices.txt
