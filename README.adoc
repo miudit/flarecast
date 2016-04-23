@@ -1,0 +1,36 @@
+= FLARECAST - Space Weather Forecast for non-experts
+:date: 2016-04-23 to 2016-04-24
+:Author: Miura, Misa-misa, Yoshi
+:revision: 1.0
+:toc:
+
+Space Apps Tsukuba @ Jaxa
+
+== Introduction
+
+- THE CHALLENGE: VIRTUAL AURORAS, SPACE STATION
+- This app/site provides forecast information of flare and aurora. Solar storm makes big impact on human health and economy. It may disturb not only astronauts but also our daily lives such as electric power transmission, machines, mobile & land telephony network, satellites, cars, and various other wireless (radio) communications. However, the existing observatory data are too difficult for non subject matter experts to understand. This app/website aims to provide current & future status of solar flare in a much general, understandable, non-expert-friendly manner, just like using typical weather forecast apps/sites.
+
+== Features
+- Shows current status and 3-days forecast of solar flare/magnetic/ and proton on NOAA scales.
+-
+
+
+== Input data
+
+- Radio blackouts
+  * GOES X-ray flux (1 min)
+  * http://services.swpc.noaa.gov/text/goes-xray-flux-primary.txt
+- Solar radiation storms
+  * Solar radiation storms GOES13 proton flux (5 min)
+  * http://services.swpc.noaa.gov/text/goes-energetic-proton-flux-primary.txt
+- Geomagnetic storms
+  * Estimated planetary k index (daily)
+  * http://services.swpc.noaa.gov/text/daily-geomagnetic-indices.txt
+- Aurora 30 min forecast
+  * Aurora nowcast
+  * http://services.swpc.noaa.gov/text/aurora-nowcast-map.txt
+
+== Output look & feel
+- See our demo
+
