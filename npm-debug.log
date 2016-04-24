@@ -1,0 +1,87 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'cesium' ]
+2 info using npm@3.6.0
+3 info using node@v5.6.0
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData cesium
+8 silly fetchNamedPackageData cesium
+9 silly mapToRegistry name cesium
+10 silly mapToRegistry using default registry
+11 silly mapToRegistry registry https://registry.npmjs.org/
+12 silly mapToRegistry uri https://registry.npmjs.org/cesium
+13 verbose request uri https://registry.npmjs.org/cesium
+14 verbose request no auth needed
+15 info attempt registry request try #1 at 10:46:30 AM
+16 verbose request id b3bf6270f4f0aa2f
+17 verbose etag "1FRC2UJZNVIUUPZFKFE25HWZS"
+18 http request GET https://registry.npmjs.org/cesium
+19 http 304 https://registry.npmjs.org/cesium
+20 verbose headers { date: 'Sun, 24 Apr 2016 01:45:59 GMT',
+20 verbose headers   via: '1.1 varnish',
+20 verbose headers   'cache-control': 'max-age=300',
+20 verbose headers   etag: '"1FRC2UJZNVIUUPZFKFE25HWZS"',
+20 verbose headers   age: '0',
+20 verbose headers   connection: 'keep-alive',
+20 verbose headers   'x-served-by': 'cache-itm7426-ITM',
+20 verbose headers   'x-cache': 'MISS',
+20 verbose headers   'x-cache-hits': '0',
+20 verbose headers   'x-timer': 'S1461462359.543047,VS0,VE1088',
+20 verbose headers   vary: 'Accept-Encoding' }
+21 silly get cb [ 304,
+21 silly get   { date: 'Sun, 24 Apr 2016 01:45:59 GMT',
+21 silly get     via: '1.1 varnish',
+21 silly get     'cache-control': 'max-age=300',
+21 silly get     etag: '"1FRC2UJZNVIUUPZFKFE25HWZS"',
+21 silly get     age: '0',
+21 silly get     connection: 'keep-alive',
+21 silly get     'x-served-by': 'cache-itm7426-ITM',
+21 silly get     'x-cache': 'MISS',
+21 silly get     'x-cache-hits': '0',
+21 silly get     'x-timer': 'S1461462359.543047,VS0,VE1088',
+21 silly get     vary: 'Accept-Encoding' } ]
+22 verbose etag https://registry.npmjs.org/cesium from cache
+23 verbose get saving cesium to /Users/spatiowl/.npm/registry.npmjs.org/cesium/.cache.json
+24 verbose correctMkdir /Users/spatiowl/.npm correctMkdir not in flight; initializing
+25 silly install normalizeTree
+26 silly loadCurrentTree Finishing
+27 silly loadIdealTree Starting
+28 silly install loadIdealTree
+29 silly cloneCurrentTree Starting
+30 silly install cloneCurrentTreeToIdealTree
+31 silly cloneCurrentTree Finishing
+32 silly loadShrinkwrap Starting
+33 silly install loadShrinkwrap
+34 silly loadShrinkwrap Finishing
+35 silly loadAllDepsIntoIdealTree Starting
+36 silly install loadAllDepsIntoIdealTree
+37 silly rollbackFailedOptional Starting
+38 silly rollbackFailedOptional Finishing
+39 silly runTopLevelLifecycles Starting
+40 silly runTopLevelLifecycles Finishing
+41 silly install printInstalled
+42 verbose stack Error: Refusing to install cesium as a dependency of itself
+42 verbose stack     at checkSelf (/usr/local/lib/node_modules/npm/lib/install/validate-args.js:53:14)
+42 verbose stack     at Array.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/slide/lib/bind-actor.js:15:8)
+42 verbose stack     at LOOP (/usr/local/lib/node_modules/npm/node_modules/slide/lib/chain.js:15:14)
+42 verbose stack     at chain (/usr/local/lib/node_modules/npm/node_modules/slide/lib/chain.js:20:5)
+42 verbose stack     at /usr/local/lib/node_modules/npm/lib/install/validate-args.js:16:5
+42 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:52:35
+42 verbose stack     at Array.forEach (native)
+42 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:52:11
+42 verbose stack     at Array.forEach (native)
+42 verbose stack     at asyncMap (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:51:8)
+43 verbose cwd /Users/spatiowl/Documents/repos/flarecast
+44 error Darwin 15.3.0
+45 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "cesium"
+46 error node v5.6.0
+47 error npm  v3.6.0
+48 error code ENOSELF
+49 error Refusing to install cesium as a dependency of itself
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
