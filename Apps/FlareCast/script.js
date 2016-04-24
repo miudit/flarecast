@@ -10,8 +10,27 @@ var average = function(list){
   return sum/list.length;
 }
 
-var wirelessLevel = function(){
-  return 2;
+var wirelessLevel = function(solarxrayflux_list, geomagnetic_list, esp){
+  result = 0;
+  result += electricityLevel(geomagnetic_list)
+
+  var val = solarxrayflux_list[solarxrayflux_list.length-1];
+  if( val <= 0.1 )
+    result += 1;
+  else if( val <= 0.5 )
+    result += 2;
+  else
+    result += 3;
+    
+  if(esp <= 4.5)
+    result += 1
+  else if(esp <= 8)
+    result += 2
+  else
+    result += 3
+    
+  return parseInt(result / 3)
+
 }
 
 var gpsLevel = function(geomagnetic_list){
@@ -37,13 +56,12 @@ var electricityLevel = function(geomagnetic_list){
 
 var airplaneLevel = function(protonflux_list){
   var val = protonflux_list[protonflux_list.length-1];
-  if( val <= 5 )
-    return 1;
-  else if( val <= 6 )
+  if( val <= 10e1 )
+    return 1 ;
+  else if( val <= 10e2 )
     return 2;
   else
     return 3;
-  return 2;
 }
 
 var auroraLevel = function(){
@@ -51,11 +69,11 @@ var auroraLevel = function(){
 }
 
 var sun_forecast = function(){
-  return [1, 1, 1] // 0: normal, 1: normal, 2: bad
+  return [1, 2, 0] // 0: good, 1: normal, 2: bad
 }
 
 var aurora_forecast = function(){
-  return [1, 1, 1] // 0: good, 1: normal, 2: bad
+  return [1, 0, 0] // 0: good, 1: normal, 2: bad
 }
 
 
@@ -112,7 +130,7 @@ var drawGrid = function(data, viewer){
   }
 }
 
-var getGeomagneticKIndexList = function(){
+var getGeomagneticKIndexList = function(solarxrayflux_list){
   $.ajax({
 		url: "http://services.swpc.noaa.gov/text/daily-geomagnetic-indices.txt"
 	}).then(function(data){ //ajaxの通信に成功した場合
@@ -135,10 +153,14 @@ var getGeomagneticKIndexList = function(){
 	  console.log("gergeg")
 	  var gps_level = gpsLevel(result)
 	  var electricity_level = electricityLevel(result)
-	  console.log(gps_level)
-	  console.log(electricity_level)
+	  console.log("gps level = " + gps_level)
+	  console.log("elec level = " + electricity_level)
+	  $(".gps").attr({"src":"./img/gps-"+String(gps_level)+".png"})
+	  $(".electricity").attr({"src":"./img/electricity-"+String(electricity_level)+".png"})
+	  
+	  getEsp(solarxrayflux_list, result)
+	  
 	  return result;
-		/*drawGrid(array, viewer);*/
 	}, function(data){ //ajaxの通信に失敗した場合
 		alert("error!");
 	});
@@ -159,8 +181,10 @@ var getSolarXrayFluxList = function(){
 	    return parseFloat(tmp[tmp.length-1]);
 	  });
 	  //console.log(result)
+	  
+	  geomagnetic_list = getGeomagneticKIndexList(result)
+	  
 	  return result;
-		/*drawGrid(array, viewer);*/
 	}, function(data){ //ajaxの通信に失敗した場合
 		alert("error!");
 	});
@@ -187,6 +211,27 @@ var getProtonFluxList = function(){
 		/*drawGrid(array, viewer);*/
 	}, function(data){ //ajaxの通信に失敗した場合
 		alert("error!");
+	});
+}
+
+var getEsp = function(solarxrayflux_list, geomagnetic_list){
+  $.ajax({
+		url: "./esp_dummy.html"
+	}).then(function(data){ //ajaxの通信に成功した場合
+		var array = data.split("\n");
+		array = array.slice(6, 10);
+		//console.log(array);
+	  var result = array.map(function(element){
+	    var tmp = element.split(" ")
+	    return parseFloat(tmp[tmp.length-1]);
+	  });
+	  var ave = average(result);
+	  var wireless_level = wirelessLevel(solarxrayflux_list, geomagnetic_list, ave)
+	  console.log("wireless_level = " + wireless_level)
+	  return result;
+		/*drawGrid(array, viewer);*/
+	}, function(data){ //ajaxの通信に失敗した場合
+		alert("error!2222222");
 	});
 }
 
@@ -217,7 +262,7 @@ $(document).ready(function(){
 		  array = array.slice(0, 93); //南極
 		else
 		  array = array.slice(419,512);
-		//drawGrid(array, viewer);
+		drawGrid(array, viewer);
 	}, function(data){ //ajaxの通信に失敗した場合
 		alert("error!");
 	});
@@ -248,7 +293,7 @@ $(document).ready(function(){
   
   console.log("draw completed")
 
-  var geomagnetic_list = getGeomagneticKIndexList()
+  //var geomagnetic_list = getGeomagneticKIndexList()
   //console.log(geomagnetic_list)
   var solarxrayflux_list = getSolarXrayFluxList()
   var protonflux_list = getProtonFluxList()

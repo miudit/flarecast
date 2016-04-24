@@ -33,63 +33,73 @@
           width: 200px;
           height: 100%;
       }
+      .logo {
+        position: relative;
+        top: 20px;
+        left: 500px;
+      }
       .sun {
         position: absolute;
-        top: 100px;
-        left: 100px;
+        top: 80px;
+        left: 60px;
         filter: alpha(opacity=50);
         -moz-opacity:0.5;
         opacity:0.5;
       }
-      .flare {
+      .wireless {
         position: absolute;
-        top: 100px;
-        left: 180px;
+        top: 40px;
+        left: 280px;
       }
-      .gemagnetism {
+      .gps {
         position: absolute;
-        top: 180px;
-        left: 180px;
+        top: 140px;
+        left: 280px;
       }
-      .proton {
+      .electricity {
         position: absolute;
-        top: 260px;
-        left: 180px;
+        top: 240px;
+        left: 280px;
+      }
+      .aviation {
+        position: absolute;
+        top: 340px;
+        left: 280px;
+      }
+      .sun_forecast_day1 {
+        position: absolute;
+        bottom: 150px;
+        left: 40px;
+      }
+      .sun_forecast_day2 {
+        position: absolute;
+        bottom: 150px;
+        left: 160px;
+      }
+      .sun_forecast_day3 {
+        position: absolute;
+        bottom: 150px;
+        left: 280px;
       }
       .aurora {
         position: absolute;
-        top: 100px;
-        right: 180px;
+        top: 80px;
+        right: 220px;
       }
-      .sun_1dayforecast {
+      .aurora_forecast_day1 {
         position: absolute;
         bottom: 150px;
-        left: 120px;
+        right: 300px;
       }
-      .sun_2dayforecast {
-        position: absolute;
-        bottom: 150px;
-        left: 180px;
-      }
-      .sun_3dayforecast {
-        position: absolute;
-        bottom: 150px;
-        left: 240px;
-      }
-      .aurora_1dayforecast {
-        position: absolute;
-        bottom: 150px;
-        right: 240px;
-      }
-      .aurora_2dayforecast {
+      .aurora_forecast_day2 {
         position: absolute;
         bottom: 150px;
         right: 180px;
       }
-      .aurora_3dayforecast {
+      .aurora_forecast_day3 {
         position: absolute;
         bottom: 150px;
-        right: 120px;
+        right: 60px;
       }
   </style>
   <link type="text/css" href="skins/all.css" rel="stylesheet" media="all" />
@@ -97,19 +107,21 @@
 <body>
   <div id="cesiumContainer"></div>
   <div class="left_space">
-    <img src="./sun.png" width=100px height=100px class="sun">
-    <img src="./sun.png" width=100px height=100px class="flare">
-    <img src="./sun.png" width=100px height=100px class="gemagnetism">
-    <img src="./sun.png" width=100px height=100px class="proton">
-    <img src="./sun.png" width=100px height=100px class="sun_1dayforecast">
-    <img src="./sun.png" width=100px height=100px class="sun_2dayforecast">
-    <img src="./sun.png" width=100px height=100px class="sun_3dayforecast">
+    <img src="./img/FLARECAST.png" width=300px height=100px class="logo">
+    <img src="./img/sun1.png" width=180px height=150px class="sun">
+    <img src="./img/wifi-1.png" width=90px height=90px class="wireless">
+    <img src="./img/gps-1.png" width=80px height=90px class="gps">
+    <img src="./img/electricity-1.png" width=90px height=90px class="electricity">
+    <img src="./img/aviation1-2.png" width=90px height=90px class="aviation">
+    <img src="./img/sun1.png" width=120px height=100px class="sun_forecast_day1">
+    <img src="./img/sun1.png" width=120px height=100px class="sun_forecast_day2">
+    <img src="./img/sun1.png" width=120px height=100px class="sun_forecast_day3">
   </div>
   <div class="right_space">
-    <img src="./sun.png" width=100px height=100px class="aurora">
-    <img src="./sun.png" width=100px height=100px class="aurora_1dayforecast">
-    <img src="./sun.png" width=100px height=100px class="aurora_2dayforecast">
-    <img src="./sun.png" width=100px height=100px class="aurora_3dayforecast">
+    <img src="./img/aurora-1.png" width=280px height=180px class="aurora">
+    <img src="./img/day1aurora.png" width=110px height=100px class="aurora_forecast_day1">
+    <img src="./img/day2aurora.png" width=110px height=100px class="aurora_forecast_day2">
+    <img src="./img/day3aurora.png" width=110px height=100px class="aurora_forecast_day3">
   </div>
 </body>
 </html>
