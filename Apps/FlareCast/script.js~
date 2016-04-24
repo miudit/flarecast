@@ -10,6 +10,55 @@ var average = function(list){
   return sum/list.length;
 }
 
+var wirelessLevel = function(){
+  return 2;
+}
+
+var gpsLevel = function(geomagnetic_list){
+  var val = geomagnetic_list[geomagnetic_list.length-1];
+  if( val <= 5 )
+    return 1;
+  else if( val <= 6 )
+    return 2;
+  else
+    return 3;
+}
+
+var electricityLevel = function(geomagnetic_list){
+  var val = geomagnetic_list[geomagnetic_list.length-1];
+  if( val <= 5 )
+    return 1;
+  else if( val <= 6 )
+    return 2;
+  else
+    return 3;
+  return 2;
+}
+
+var airplaneLevel = function(protonflux_list){
+  var val = protonflux_list[protonflux_list.length-1];
+  if( val <= 5 )
+    return 1;
+  else if( val <= 6 )
+    return 2;
+  else
+    return 3;
+  return 2;
+}
+
+var auroraLevel = function(){
+  return 3;
+}
+
+var sun_forecast = function(){
+  return [1, 1, 1] // 0: normal, 1: normal, 2: bad
+}
+
+var aurora_forecast = function(){
+  return [1, 1, 1] // 0: good, 1: normal, 2: bad
+}
+
+
 var createGridCell = function(row_index, col_index, element, viewer){
   var col_resolution = 360.0 / 1024.0;
   var row_resolution = 180.0 / 512.0;
@@ -39,7 +88,7 @@ var drawGrid = function(data, viewer){
           continue;
         }
         element = average(element_list);
-        console.log(element)
+        //console.log(element)
         createGridCell(512-row, col, element, viewer);
         element_list = []
       }
@@ -55,7 +104,7 @@ var drawGrid = function(data, viewer){
           continue;
         }
         element = average(element_list);
-        console.log(element)
+        //console.log(element)
         createGridCell(row, col, element, viewer);
         element_list = []
       }
@@ -74,20 +123,20 @@ var getGeomagneticKIndexList = function(){
 		array = array.slice(-5, -2);
 	  var result = [];
 	  for( var i=array.length-3; i<array.length; i++ ){
-	    console.log(array[i].split("    ")[3].split("  ")) 
+	    //console.log(array[i].split("    ")[3].split("  ")) 
 	    if( array[i].split("    ")[3].split("  ").length != 0 ){
-	      var elemlist = array[i].split("    ")[3].split("  ")[1].split(" ")
-	      console.log(elemlist)
+	      var elemlist = array[i].split("    ")[3].split("  ")[1].split(" ").map(function(element){
+	        return parseFloat(element)
+	      })
+	      //console.log(elemlist)
 	      result += elemlist;
 	    }
 	  }
-	  /*var result = array.map(function(element){
-	    if( element.split("    ")[3].split("  ").length != 0 ){
-	      elemlist = element.split("    ")[3].split("  ").slice(2, -1);
-	      return elemlist
-	    }
-	  });*/
-	  console.log(result)
+	  console.log("gergeg")
+	  var gps_level = gpsLevel(result)
+	  var electricity_level = electricityLevel(result)
+	  console.log(gps_level)
+	  console.log(electricity_level)
 	  return result;
 		/*drawGrid(array, viewer);*/
 	}, function(data){ //ajaxの通信に失敗した場合
@@ -104,12 +153,12 @@ var getSolarXrayFluxList = function(){
 		  return line[0] != '#' && line[0] != ':';
 		})
 		array = array.slice(0, -2);
-		console.log(array);
+		//console.log(array);
 	  var result = array.map(function(element){
 	    var tmp = element.split("    ")
-	    return tmp[tmp.length-1];
+	    return parseFloat(tmp[tmp.length-1]);
 	  });
-	  console.log(result)
+	  //console.log(result)
 	  return result;
 		/*drawGrid(array, viewer);*/
 	}, function(data){ //ajaxの通信に失敗した場合
@@ -126,45 +175,17 @@ var getProtonFluxList = function(){
 		  return line[0] != '#' && line[0] != ':';
 		})
 		array = array.slice(0, -2);
-		console.log(array);
+		//console.log(array);
 	  var result = array.map(function(element){
 	    var tmp = element.split("  ")
-	    return tmp[tmp.length-11];
+	    return parseFloat(tmp[tmp.length-11]);
 	  });
-	  console.log(result)
+	  //console.log(result)
 	  return result;
 		/*drawGrid(array, viewer);*/
 	}, function(data){ //ajaxの通信に失敗した場合
 		alert("error!");
 	});
-}
-
-var wirelessLevel = function(){
-  return 2;
-}
-
-var gpsLevel = function(){
-  return 2;
-}
-
-var erectricityLevel = function(){
-  return 2;
-}
-
-var airplaneLevel = function(){
-  return 2;
-}
-
-var auroraLevel = function(){
-  return 3;
-}
-
-var sun_forecast = function(){
-  return [1, 1, 1] // 0: good, 1: normal, 2: bad
-}
-
-var aurora_forecast = function(){
-  return [1, 1, 1] // 0: good, 1: normal, 2: bad
 }
 
 $(document).ready(function(){
@@ -226,6 +247,15 @@ $(document).ready(function(){
   console.log("draw completed")
 
   var geomagnetic_list = getGeomagneticKIndexList()
-  //var solarxrayflux_list = getSolarXrayFluxList()
-  //var protonflux_list = getProtonFluxList()
+  //console.log(geomagnetic_list)
+  var solarxrayflux_list = getSolarXrayFluxList()
+  var protonflux_list = getProtonFluxList()
+  
+  //var wireless_level = wirelessLevel()
+  //var gps_level = gpsLevel(geomagnetic_list)
+  //var electricity_level = electricityLevel(geomagnetic_list)
+  //var airplane_level = airplaneLevel(protonflux_list)
+  //console.log("GPS LEVEL = " + gps_level)
+  //console.log("ELECTRICITY LEVEL = " + electricity_level)
+  //console.log("AIRPLANE LEVEL = " + airplane_level)
 });
