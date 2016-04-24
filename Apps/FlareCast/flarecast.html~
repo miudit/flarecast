@@ -44,51 +44,51 @@
       .flare {
         position: absolute;
         top: 100px;
-        left: 130px;
+        left: 180px;
       }
       .gemagnetism {
         position: absolute;
-        top: 130px;
-        left: 130px;
+        top: 180px;
+        left: 180px;
       }
       .proton {
         position: absolute;
-        top: 160px;
-        left: 130px;
+        top: 260px;
+        left: 180px;
       }
       .aurora {
         position: absolute;
         top: 100px;
-        right: 100px;
+        right: 180px;
       }
       .sun_1dayforecast {
         position: absolute;
-        bottom: 120px;
+        bottom: 150px;
         left: 120px;
       }
       .sun_2dayforecast {
         position: absolute;
-        bottom: 120px;
-        left: 150px;
+        bottom: 150px;
+        left: 180px;
       }
       .sun_3dayforecast {
         position: absolute;
-        bottom: 120px;
-        left: 180px;
+        bottom: 150px;
+        left: 240px;
       }
       .aurora_1dayforecast {
         position: absolute;
-        bottom: 120px;
-        right: 180px;
+        bottom: 150px;
+        right: 240px;
       }
       .aurora_2dayforecast {
         position: absolute;
-        bottom: 120px;
-        right: 150px;
+        bottom: 150px;
+        right: 180px;
       }
       .aurora_3dayforecast {
         position: absolute;
-        bottom: 120px;
+        bottom: 150px;
         right: 120px;
       }
   </style>
