@@ -21,14 +21,14 @@ var wirelessLevel = function(solarxrayflux_list, geomagnetic_list, esp){
     result += 2;
   else
     result += 3;
-    
+
   if(esp <= 4.5)
     result += 1
   else if(esp <= 8)
     result += 2
   else
     result += 3
-    
+
   return parseInt(result / 3)
 
 }
@@ -64,16 +64,31 @@ var airplaneLevel = function(protonflux_list){
     return 3;
 }
 
-var auroraLevel = function(){
-  return 3;
+var auroraLevel = function(element){
+  if( element <= 20 )
+    return 1;
+  else if( element <= 40 )
+    return 2;
+  else if( element <= 60 )
+    return 3;
+  else if( element <= 80 )
+    return 4;
+  else if( element <= 90 )
+    return 5;
 }
 
 var sun_forecast = function(){
-  return [1, 2, 0] // 0: good, 1: normal, 2: bad
+  forecast = [2, 3, 1] // 1: good, 2: normal, 3: bad
+  $(".sun_forecast_day1").attr({"src":"./img/DAY1SUN-"+String(forecast[0])+".png"})
+  $(".sun_forecast_day2").attr({"src":"./img/DAY2SUN-"+String(forecast[1])+".png"})
+  $(".sun_forecast_day3").attr({"src":"./img/DAY3SUN-"+String(forecast[2])+".png"})
 }
 
 var aurora_forecast = function(){
-  return [1, 0, 0] // 0: good, 1: normal, 2: bad
+  forecast [3, 1, 2] // 1: good, 2: normal, 3: bad
+  $(".aurora_forecast_day1").attr({"src":"./img/DAY1AURORA"+String(forecast[0])+".png"})
+  $(".aurora_forecast_day2").attr({"src":"./img/DAY2AURORA"+String(forecast[1])+".png"})
+  $(".aurora_forecast_day3").attr({"src":"./img/DAY3AURORA"+String(forecast[2])+".png"})
 }
 
 
@@ -96,11 +111,14 @@ var createGridCell = function(row_index, col_index, element, viewer){
 
 var drawGrid = function(data, viewer){
   var element_list = [];
+  var elem_max = 0;
   if( view_north ){
     for( var row=92; row>=0; row-- ){
       data_row = data[92-row].split('   ').slice(1, 1025);
       for( var col=0; col<1024; col++ ){
         var element = parseInt(data_row[col]);
+        if( element > elem_max )
+          elem_max = element;
         element_list.push(element)
         if( element_list.length < col_merge_num ){
           continue;
@@ -117,6 +135,8 @@ var drawGrid = function(data, viewer){
       data_row = data[row].split('   ').slice(1, 1025);
       for( var col=0; col<1024; col++ ){
         var element = parseInt(data_row[col]);
+        if( element > elem_max )
+          elem_max = element;
         element_list.push(element)
         if( element_list.length < col_merge_num ){
           continue;
@@ -128,6 +148,7 @@ var drawGrid = function(data, viewer){
       }
     }
   }
+  $(".aurora").attr({"src":"./img/AURORA-"+String(auroraLevel(elem_max))+".png"})
 }
 
 var getGeomagneticKIndexList = function(solarxrayflux_list){
@@ -141,7 +162,7 @@ var getGeomagneticKIndexList = function(solarxrayflux_list){
 		array = array.slice(-5, -2);
 	  var result = [];
 	  for( var i=array.length-3; i<array.length; i++ ){
-	    //console.log(array[i].split("    ")[3].split("  ")) 
+	    //console.log(array[i].split("    ")[3].split("  "))
 	    if( array[i].split("    ")[3].split("  ").length != 0 ){
 	      var elemlist = array[i].split("    ")[3].split("  ")[1].split(" ").map(function(element){
 	        return parseFloat(element)
@@ -157,9 +178,9 @@ var getGeomagneticKIndexList = function(solarxrayflux_list){
 	  console.log("elec level = " + electricity_level)
 	  $(".gps").attr({"src":"./img/gps-"+String(gps_level)+".png"})
 	  $(".electricity").attr({"src":"./img/electricity-"+String(electricity_level)+".png"})
-	  
+
 	  getEsp(solarxrayflux_list, result)
-	  
+
 	  return result;
 	}, function(data){ //ajaxの通信に失敗した場合
 		alert("error!");
@@ -181,9 +202,9 @@ var getSolarXrayFluxList = function(){
 	    return parseFloat(tmp[tmp.length-1]);
 	  });
 	  //console.log(result)
-	  
+
 	  geomagnetic_list = getGeomagneticKIndexList(result)
-	  
+
 	  return result;
 	}, function(data){ //ajaxの通信に失敗した場合
 		alert("error!");
@@ -207,7 +228,9 @@ var getProtonFluxList = function(){
 	  //console.log(result)
 	  var airplane_level = airplaneLevel(result)
 	  console.log(airplane_level)
-	  return result;
+	  $(".aviation").attr({"src":"./img/aviation"+String(airplane_level)+"-2.png"})
+
+      return result;
 		/*drawGrid(array, viewer);*/
 	}, function(data){ //ajaxの通信に失敗した場合
 		alert("error!");
@@ -227,6 +250,7 @@ var getEsp = function(solarxrayflux_list, geomagnetic_list){
 	  });
 	  var ave = average(result);
 	  var wireless_level = wirelessLevel(solarxrayflux_list, geomagnetic_list, ave)
+	  $(".wireless").attr({"src":"./img/wifi-"+String(wireless_level)+".png"})
 	  console.log("wireless_level = " + wireless_level)
 	  return result;
 		/*drawGrid(array, viewer);*/
@@ -237,7 +261,7 @@ var getEsp = function(solarxrayflux_list, geomagnetic_list){
 
 $(document).ready(function(){
   var viewer = new Cesium.Viewer('cesiumContainer');
-  
+
   /*var band_array = [-180.0, 60.0];
   for( var i=1; i<=180; i++ ){
     band_array.push(-180+2.0*i);
@@ -250,7 +274,7 @@ $(document).ready(function(){
   console.log(band_array)
   //band_array.push(-180);
   //band_array.push(55.0);*/
-  
+
   $.ajax({
 		url: "http://services.swpc.noaa.gov/text/aurora-nowcast-map.txt"
 	}).then(function(data){ //ajaxの通信に成功した場合
@@ -266,7 +290,7 @@ $(document).ready(function(){
 	}, function(data){ //ajaxの通信に失敗した場合
 		alert("error!");
 	});
-  
+
   /*var wyoming = viewer.entities.add({
     name : 'Wyoming',
     polygon : {
@@ -290,14 +314,14 @@ $(document).ready(function(){
     }
   });
   viewer.zoomTo(wyoming);*/
-  
+
   console.log("draw completed")
 
   //var geomagnetic_list = getGeomagneticKIndexList()
   //console.log(geomagnetic_list)
   var solarxrayflux_list = getSolarXrayFluxList()
   var protonflux_list = getProtonFluxList()
-  
+
   //var wireless_level = wirelessLevel()
   //var gps_level = gpsLevel(geomagnetic_list)
   //var electricity_level = electricityLevel(geomagnetic_list)
@@ -305,4 +329,6 @@ $(document).ready(function(){
   //console.log("GPS LEVEL = " + gps_level)
   //console.log("ELECTRICITY LEVEL = " + electricity_level)
   //console.log("AIRPLANE LEVEL = " + airplane_level)
+  sun_forecast();
+  aurora_forecast();
 });
